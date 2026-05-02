@@ -45,6 +45,20 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 The API will be available at `http://localhost:8000`
 
+### Railway Deployment
+
+This repo includes both Railway builder configs:
+
+- `railpack.json` for Railway's default Railpack builder
+- `nixpacks.toml` for legacy Nixpacks deployments
+
+Both configs install the system `ffmpeg` package, which provides `ffmpeg` and
+`ffprobe`, and start the app with Railway's assigned port:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
 ## API Endpoints
 
 ### 1. Extract First Frame (Image Response)

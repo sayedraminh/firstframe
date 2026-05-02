@@ -5,7 +5,9 @@ import numpy as np
 import io
 import tempfile
 import os
-from typing import Optional
+from filename_utils import safe_client_filename
+
+VALID_VIDEO_EXTENSIONS = ('.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv', '.m4v', '.3gp')
 
 app = FastAPI(
     title="First Frame Extractor",
@@ -30,7 +32,7 @@ async def extract_first_frame(file: UploadFile = File(...)):
         StreamingResponse: First frame as JPEG image
     """
     # Validate file type - check both content type and file extension
-    valid_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv', '.m4v', '.3gp']
+    valid_extensions = VALID_VIDEO_EXTENSIONS
     file_extension = os.path.splitext(file.filename.lower())[1] if file.filename else ''
     
     is_valid_content_type = file.content_type and file.content_type.startswith('video/')
@@ -81,7 +83,7 @@ async def extract_first_frame(file: UploadFile = File(...)):
                 io.BytesIO(frame_bytes), 
                 media_type="image/jpeg",
                 headers={
-                    "Content-Disposition": f"inline; filename=first_frame_{file.filename}.jpg"
+                    "Content-Disposition": f"inline; filename=first_frame_{safe_client_filename(file.filename)}.jpg"
                 }
             )
             
@@ -109,7 +111,7 @@ async def extract_first_frame_with_info(file: UploadFile = File(...)):
     import base64
     
     # Validate file type - check both content type and file extension
-    valid_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv', '.m4v', '.3gp']
+    valid_extensions = VALID_VIDEO_EXTENSIONS
     file_extension = os.path.splitext(file.filename.lower())[1] if file.filename else ''
     
     is_valid_content_type = file.content_type and file.content_type.startswith('video/')
@@ -164,7 +166,7 @@ async def extract_first_frame_with_info(file: UploadFile = File(...)):
             return {
                 "image_base64": frame_base64,
                 "video_info": {
-                    "filename": file.filename,
+                    "filename": safe_client_filename(file.filename),
                     "width": width,
                     "height": height,
                     "fps": fps,
@@ -186,4 +188,4 @@ async def extract_first_frame_with_info(file: UploadFile = File(...)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", "8000")))
