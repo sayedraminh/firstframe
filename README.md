@@ -40,10 +40,10 @@ python main.py
 
 ### Production Server
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port 8088
 ```
 
-The API will be available at `http://localhost:8000`
+The API will be available at `http://localhost:8088`
 
 ### Railway Deployment
 
@@ -77,7 +77,7 @@ Uploads a video file and returns the first frame as a JPEG image.
 
 **Example using curl:**
 ```bash
-curl -X POST "http://localhost:8000/extract-first-frame/" \
+curl -X POST "http://localhost:8088/extract-first-frame/" \
      -H "accept: image/jpeg" \
      -H "Content-Type: multipart/form-data" \
      -F "file=@your_video.mp4" \
@@ -112,7 +112,7 @@ Uploads a video file and returns the first frame as base64 along with video meta
 
 **Example using curl:**
 ```bash
-curl -X POST "http://localhost:8000/extract-first-frame-info/" \
+curl -X POST "http://localhost:8088/extract-first-frame-info/" \
      -H "accept: application/json" \
      -H "Content-Type: multipart/form-data" \
      -F "file=@your_video.mp4"
@@ -133,8 +133,8 @@ Returns API status.
 ## Interactive API Documentation
 
 Once the server is running, you can access:
-- **Swagger UI**: `http://localhost:8000/docs`
-- **ReDoc**: `http://localhost:8000/redoc`
+- **Swagger UI**: `http://localhost:8088/docs`
+- **ReDoc**: `http://localhost:8088/redoc`
 
 These provide interactive documentation where you can test the endpoints directly from your browser.
 
@@ -174,7 +174,7 @@ The API provides clear error messages for common issues:
 import requests
 
 def extract_first_frame(video_path, output_path):
-    url = "http://localhost:8000/extract-first-frame/"
+    url = "http://localhost:8088/extract-first-frame/"
     
     with open(video_path, "rb") as video_file:
         files = {"file": video_file}

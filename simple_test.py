@@ -11,7 +11,7 @@ import os
 
 def test_api():
     """Simple test function."""
-    base_url = "http://localhost:8000"
+    base_url = "http://localhost:8088"
     
     print("🚀 Simple Test for First Frame Extractor API")
     print("=" * 50)

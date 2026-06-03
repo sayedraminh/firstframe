@@ -19,7 +19,7 @@ export default function VideoFrameExtractor() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL = 'http://localhost:8000'; // Your FastAPI URL
+  const API_BASE_URL = 'http://localhost:8088'; // Your FastAPI URL
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -207,7 +207,7 @@ const VideoFrameExtractor: React.FC = () => {
     processingTime: null,
   });
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088';
 
   const resetState = useCallback(() => {
     setState(prev => ({
@@ -466,7 +466,7 @@ Create a `.env.local` file in your Next.js project:
 
 ```bash
 # .env.local
-NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_API_URL=http://localhost:8088
 ```
 
 For production:

@@ -9,7 +9,7 @@ import time
 
 def test_with_custom_video(video_path):
     """Test the API with your specific video file."""
-    base_url = "http://localhost:8000"
+    base_url = "http://localhost:8088"
     
     print(f"🎬 Testing with your video: {video_path}")
     print("=" * 60)

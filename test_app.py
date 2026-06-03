@@ -18,7 +18,7 @@ import time
 
 
 class FirstFrameExtractorTester:
-    def __init__(self, base_url="http://localhost:8000"):
+    def __init__(self, base_url="http://localhost:8088"):
         self.base_url = base_url
         self.test_results = []
         
@@ -242,7 +242,7 @@ class FirstFrameExtractorTester:
             print("\n❌ Server is not running. Please start the FastAPI server first:")
             print("   python main.py")
             print("   or")
-            print("   uvicorn main:app --host 0.0.0.0 --port 8000")
+            print("   uvicorn main:app --host 0.0.0.0 --port 8088")
             return
         
         print("\n" + "=" * 60)
@@ -311,11 +311,11 @@ class FirstFrameExtractorTester:
 def main():
     """Main function to run tests."""
     print("First Frame Extractor API Tester")
-    print("Make sure your FastAPI server is running on http://localhost:8000")
+    print("Make sure your FastAPI server is running on http://localhost:8088")
     print()
     
     # You can change the base URL if your server is running on a different port
-    tester = FirstFrameExtractorTester(base_url="http://localhost:8000")
+    tester = FirstFrameExtractorTester(base_url="http://localhost:8088")
     
     try:
         tester.run_all_tests()
