@@ -19,11 +19,11 @@ A high-performance FastAPI application that extracts the first frame from upload
    cd firstframevid
    ```
 
-2. **Activate your virtual environment** (if using one):
+2. **Create and activate a Python 3.14 virtual environment**:
    ```bash
-   source venv/bin/activate  # On macOS/Linux
-   # or
-   venv\Scripts\activate  # On Windows
+   python3.14 -m venv venv
+   source venv/bin/activate
+   python -m pip install --upgrade pip
    ```
 
 3. **Install dependencies**:
